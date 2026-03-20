@@ -40,6 +40,14 @@ float adc_task_handle()
     }
 }
 
+float adcv_task_handle()
+{
+    adc_select_input(ADC_CHANNEL);
+    uint16_t voltage_counts = adc_read();
+    float voltage_V = voltage_counts * 3.3 / pow(2, 12);
+    return voltage_V;
+}
+
 float temp_task_handle()
 {
     adc_select_input(TEMP_CHANNEL);

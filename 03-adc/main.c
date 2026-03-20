@@ -80,7 +80,7 @@ void wmem_callback(const char* args)
 
 void get_adc_callback()
 {
-    float voltage_V = adc_task_handle();
+    float voltage_V = adcv_task_handle();
     printf("%f\n", voltage_V);
 }
 
