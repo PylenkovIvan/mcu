@@ -90,6 +90,16 @@ void get_temp_callback()
     printf("%f\n", temp_C);
 }
 
+void tm_start_callback()
+{
+    adc_task_set_state(ADC_TASK_STATE_RUN);
+}
+
+void tm_stop_callback()
+{
+    adc_task_set_state(ADC_TASK_STATE_IDLE);
+}
+
 api_t device_api[] =
 {
 	{"version", version_callback, "get device name and firmware version"},
@@ -102,6 +112,8 @@ api_t device_api[] =
     {"wmem", wmem_callback, "write in memory"},
     {"get_adc", get_adc_callback, "get adc"},
     {"get_temp", get_temp_callback, "get temp"},
+    {"tm_start", tm_start_callback, "start measurements"},
+    {"tm_stop", tm_stop_callback, "stop measurements"},
 	{NULL, NULL, NULL},
 };
 
@@ -129,5 +141,6 @@ main()
         char* command_name = stdio_task_handle();
         protocol_task_handle(command_name);
         led_task_handle();
+        adc_task_handle();
     }
 }
